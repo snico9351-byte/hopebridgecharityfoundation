@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | HopeBridge Foundation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <!-- Login Box -->
+    <div id="loginBox" class="admin-login">
+        <h1>🕊️ HopeBridge Admin</h1>
+        <p>Enter the admin password to manage donations and send thank-you messages.</p>
+        <div class="form-group" style="text-align:left;">
+            <label for="adminPassword">Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter password" style="width:100%;padding:12px;border:1.5px solid #ddd;border-radius:10px;margin-bottom:16px;">
+        </div>
+        <button onclick="loginAdmin()" class="btn btn-primary btn-full">Login</button>
+        <p style="margin-top:20px;font-size:0.85rem;color:#999;">Default password: <code>hope2026</code><br>(Change it in script.js)</p>
+        <p style="margin-top:12px;"><a href="index.html" style="color:#c0392b;">← Back to website</a></p>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <div class="container">
+                <h1>HopeBridge Admin Panel</h1>
+                <button class="logout-btn" onclick="logoutAdmin()">Logout</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <strong id="totalCount">0</strong>
+                    Total Submissions
+                </div>
+                <div class="stat-card">
+                    <strong id="pendingCount">0</strong>
+                    Awaiting Thank-You
+                </div>
+            </div>
+
+            <!-- Appreciation Message Composer -->
+            <div class="compose-box">
+                <h3>📝 Appreciation Message Template</h3>
+                <p style="font-size:0.9rem;color:#666;margin-bottom:12px;">
+                    Use <code>{name}</code> and <code>{amount}</code> — they will be replaced automatically for each donor.
+                </p>
+                <textarea id="appreciationMsg" oninput="updateMessagePreview()"></textarea>
+                <p style="font-size:0.85rem;color:#888;">
+                    When you click “Send Thank You”, WhatsApp will open with this message pre-filled for that donor’s number. Just press Send in WhatsApp.
+                </p>
+            </div>
+
+            <!-- Donors Table -->
+            <div class="donors-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone / WhatsApp</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Message</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="donorsBody"></tbody>
+                </table>
+                <div id="emptyState" class="empty-state" style="display:none;">
+                    <p>No donations submitted yet.</p>
+                    <p style="font-size:0.9rem;">When people fill the form on the website, they will appear here.</p>
+                </div>
+            </div>
+
+            <p style="margin-top:24px;font-size:0.9rem;color:#666;text-align:center;">
+                Note: This is a client-side demo. Data is stored in the browser’s localStorage.
+                For a real organisation you should connect a proper backend database and WhatsApp Business API.
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
